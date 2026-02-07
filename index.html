@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AiMotion Studio</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="top-bar">
+        <div class="brand">
+          <span class="logo">✦</span>
+          <div>
+            <h1>AiMotion Studio</h1>
+            <p>สตูดิโอแอนนิเมชั่น 2D สไตล์อนิเมะ พร้อมผู้ช่วย AI</p>
+          </div>
+        </div>
+        <div class="top-actions">
+          <button id="exportFrame" class="ghost">Export Frame PNG</button>
+          <button id="togglePlayback" class="primary">Play</button>
+        </div>
+      </header>
+
+      <main class="workspace">
+        <section class="viewport">
+          <div class="viewport-header">
+            <h2>Anime Canvas 2D</h2>
+            <div class="viewport-controls">
+              <button class="ghost">Line Art</button>
+              <button class="ghost">Cel Shade</button>
+              <button class="ghost">Ink Bloom</button>
+            </div>
+          </div>
+          <div class="viewport-canvas">
+            <canvas id="animeCanvas" width="860" height="420"></canvas>
+            <div class="scene-overlay">
+              <div>
+                <strong>Scene Stats</strong>
+                <p>Layers: 3 • Props: 4 • Camera: 2D Dolly</p>
+              </div>
+              <div>
+                <strong>Frame</strong>
+                <p id="frameDisplay">Frame 024</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <aside class="right-rail">
+          <section class="ai-panel">
+            <h2>ผู้ช่วย AI</h2>
+            <p>พิมพ์ไอเดียเพื่อให้ AI ช่วยสร้างสตอรี่บอร์ด, การเคลื่อนไหวแบบอนิเมะ หรือเอฟเฟกต์เส้น</p>
+            <textarea id="aiPrompt" rows="5" placeholder="เช่น ทำท่ากระโดดแบบชิบิ พร้อมเอฟเฟกต์สปีดไลน์"></textarea>
+            <div class="ai-actions">
+              <button id="aiGenerate" class="primary">สร้างคำแนะนำ</button>
+              <button id="aiApply" class="ghost">สร้างคีย์เฟรม</button>
+            </div>
+            <div id="aiOutput" class="ai-output">
+              <div class="placeholder">ผลลัพธ์ AI จะปรากฏที่นี่</div>
+            </div>
+          </section>
+
+          <section class="rig-panel">
+            <h2>2D Rig &amp; Pose</h2>
+            <div class="control-row">
+              <label for="posX">ตำแหน่ง X</label>
+              <input id="posX" type="range" min="0" max="860" value="430" />
+            </div>
+            <div class="control-row">
+              <label for="posY">ตำแหน่ง Y</label>
+              <input id="posY" type="range" min="0" max="420" value="260" />
+            </div>
+            <div class="control-row">
+              <label for="scale">สเกล</label>
+              <input id="scale" type="range" min="0.6" max="1.6" step="0.05" value="1" />
+            </div>
+            <div class="control-row">
+              <label for="rotation">หมุน</label>
+              <input id="rotation" type="range" min="-30" max="30" value="0" />
+            </div>
+            <div class="rig-actions">
+              <button id="addKeyframe" class="ghost">Add Keyframe</button>
+              <button id="clearKeyframes" class="ghost">Clear</button>
+            </div>
+          </section>
+        </aside>
+      </main>
+
+      <section class="timeline">
+        <div class="timeline-header">
+          <h2>Timeline</h2>
+          <div class="timeline-actions">
+            <button class="ghost">Add Keyframe</button>
+            <button class="ghost">Auto Ease</button>
+            <button class="primary">Loop</button>
+          </div>
+        </div>
+        <div class="timeline-tracks">
+          <div class="track">
+            <div class="track-label">Camera</div>
+            <div class="track-frames" id="cameraTrack"></div>
+          </div>
+          <div class="track">
+            <div class="track-label">Character</div>
+            <div class="track-frames" id="characterTrack"></div>
+          </div>
+          <div class="track">
+            <div class="track-label">Lights</div>
+            <div class="track-frames" id="lightTrack"></div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>
